@@ -23,6 +23,10 @@ let $BAT_THEME='Nord'   " File preview colorscheme
 highlight ColorColumn ctermbg=magenta
 call matchadd('ColorColumn', '\%100v', 100)
 
+" Persist undo across sessions
+set undodir=~/.vim/undo
+set undofile
+
 " Use space as leader
 let mapleader=" "
 nnoremap <SPACE> <Nop>

@@ -9,13 +9,13 @@
 
 ## Features
 
-- Filename, col and rol on statusline
+- Show filename, col and row on statusline
 - Mouse support on OSX and Linux
-- Cut/copy/paste support to system clipboard using vim commands on OSX `d, D, y, Y, p, P`
+- Cut/copy/paste support to OSX clipboard
 - Copy/paste support to system clipboard on Linux `<Leader>c` or `<Leader>v`
 - Return to last edit position when opening files
 - Navigate split panels in normal mode with `Ctrl` + `hjkl`
-- Use `:SudoW` to write (save) file with sudo
+- Use `:W` to write (save) file with sudo
 - Elixir support: lexical, credo, dialyzer, `mix format` on save
 - Elixir language server:
     * go to function definition `gd`
