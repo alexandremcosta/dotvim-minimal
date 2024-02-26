@@ -1,0 +1,12 @@
+[submodule "pack/plugins/start/fzf"]
+	path = pack/plugins/start/fzf
+	url = https://github.com/junegunn/fzf
+[submodule "pack/plugins/start/fzf.vim"]
+	path = pack/plugins/start/fzf.vim
+	url = https://github.com/junegunn/fzf.vim
+[submodule "pack/plugins/start/ale"]
+	path = pack/plugins/start/ale
+	url = https://github.com/dense-analysis/ale
+[submodule "/Users/alex/.vim/pack/plugins/start/copilot.vim"]
+	path = /Users/alex/.vim/pack/plugins/start/copilot.vim
+	url = https://github.com/github/copilot.vim.git
