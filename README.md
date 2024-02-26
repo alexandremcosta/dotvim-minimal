@@ -13,16 +13,14 @@
 - Mouse support on OSX and Linux
 - Cut/copy/paste support to system clipboard using vim commands on OSX `d, D, y, Y, p, P`
 - Copy/paste support to system clipboard on Linux `<Leader>c` or `<Leader>v`
+- Return to last edit position when opening files
+- Navigate split panels in normal mode with `Ctrl` + `hjkl`
+- Use `:SudoW` to write (save) file with sudo
 - Elixir support: lexical, credo, dialyzer, `mix format` on save
 - Elixir language server:
     * go to function definition `gd`
     * go back `<Ctrl-o>`
     * hover function docs `shift-k`
-
-## TODO
-- Use `:SudoW` to write (save) file with sudo
-- Return to last edit position when opening files
-- Navigate split panels in normal mode with `Ctrl` + `hjkl`
 
 ## Other Keyboard Mappings
 Install ripgrep and fzf for full functionality.
@@ -37,6 +35,7 @@ Install ripgrep and fzf for full functionality.
 | Find file with fzf and rg | `<Leader>ff` |
 | On `fzf`, open file in **split** pane | `<Ctrl-x>` |
 | On `fzf`, open file in **vertical** split pane | `<Ctrl-v>` |
+| Git blame current line | `<Leader>b` |
 | Run elixir **test** under cursor | `<Leader>t` |
 | Run all elixir **tests** on current file | `<Leader>T` |
 | Paste `IO.inspect(label: "")` leaving cursor between quotes | `<Leader>i` |

@@ -24,12 +24,29 @@ nmap <Leader>ff :Files<CR>
 nmap <Leader>fo :History<CR>
 nmap <Leader>fw :Rg<CR>
 nmap <Leader>fg :silent grep
-nmap gd :ALEGoToDefinition<CR>
-nmap <s-k> :ALEHover<CR>
+
+" Git Blame
+nmap <silent> <Leader>b :!git blame --color-by-age --date short -- %<CR>
+
+" Save with sudo
+command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
+nmap <Leader>W :W<CR>
+
+" Split navigation
 nmap <bar> :vsplit<CR>
 nmap \ :split<CR>
+nmap <silent> <c-h> <c-w>h
+nmap <silent> <c-j> <c-w>j
+nmap <silent> <c-k> <c-w>k
+nmap <silent> <c-l> <c-w>l
 
-" ALE Configuration
+" Quickfix Navigation
+nmap <silent> [q :cprevious<CR>
+nmap <silent> ]q :cnext<CR>
+
+" ALE
+nmap gd :ALEGoToDefinition<CR>
+nmap <s-k> :ALEHover<CR>
 let g:ale_floating_preview = 1
 let g:ale_hover_cursor = 0
 let g:ale_history_enabled = 1
@@ -41,16 +58,17 @@ let g:ale_elixir_lexical_release = '/users/alex/dev/clones/lexical/_build/dev/pa
 let g:ale_completion_enabled = 1
 let g:ale_fixers = {'*': ['remove_trailing_lines', 'trim_whitespace'], 'elixir': ['mix_format']}
 
-" Quickfix Navigation
-nmap <silent> [q :cprevious<CR>
-nmap <silent> ]q :cnext<CR>
-
 " Automatically open the quickfix window after :make, :grep, :lvimgrep
 augroup openquickfix
     autocmd!
     autocmd QuickFixCmdPost [^l]* cwindow
     autocmd QuickFixCmdPost l*    lwindow
 augroup END
+
+" Return to last edit position when opening files
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+endif
 
 " Use ripgrep on :grep if available
 if executable('rg')
