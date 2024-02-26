@@ -1,7 +1,7 @@
 " General Settings
-syntax enable
 set autoindent          " Enable auto-indentation
 set autoread            " Reload file after external program formats it
+set cursorline          " Highlight cursor line
 set expandtab           " Expand tabs to spaces
 set hlsearch            " Highlight search results
 set incsearch           " Incremental search, highlight as you type
@@ -14,23 +14,39 @@ set statusline+=%F\ %l\:%c " Filename, line, and col on status line
 set laststatus=2         " Always show status line
 let g:netrw_liststyle=3  " Set netrw list style
 
-" Leader mappings
+" Colors
+syntax enable
+colorscheme sorbet
+let $BAT_THEME='Nord'   " File preview colorscheme
+
+" Highlight column limit at 100. Vim requires restart vim after changing this.
+highlight ColorColumn ctermbg=magenta
+call matchadd('ColorColumn', '\%100v', 100)
+
+" Use space as leader
 let mapleader=" "
 nnoremap <SPACE> <Nop>
+
+" Leader mappings
 nmap <Leader>w :w<CR>
 nmap <Leader>q :q<CR>
 nmap <Leader>e :Explore<CR>
+nmap <Leader>g :!lazygit<CR>
 nmap <Leader>ff :Files<CR>
 nmap <Leader>fo :History<CR>
 nmap <Leader>fw :Rg<CR>
 nmap <Leader>fg :silent grep
 
 " Git Blame
-nmap <silent> <Leader>b :!git blame --color-by-age --date short -- %<CR>
+nmap <Leader>b :vert term git blame -- %<CR>
 
 " Save with sudo
-command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
+command W :execute ':silent w !sudo tee % > /dev/null' \| :edit!
 nmap <Leader>W :W<CR>
+
+" Terminal
+nmap <c-t> :terminal<CR>
+nmap <s-t> :vertical terminal<CR>
 
 " Split navigation
 nmap <bar> :vsplit<CR>
@@ -39,6 +55,12 @@ nmap <silent> <c-h> <c-w>h
 nmap <silent> <c-j> <c-w>j
 nmap <silent> <c-k> <c-w>k
 nmap <silent> <c-l> <c-w>l
+
+" Resize
+nnoremap <Left> :vertical resize +2<CR>
+nnoremap <Right> :vertical resize -2<CR>
+nnoremap <Up> :resize -2<CR>
+nnoremap <Down> :resize +2<CR>
 
 " Quickfix Navigation
 nmap <silent> [q :cprevious<CR>
@@ -108,12 +130,10 @@ function! s:MixTest(command) abort
     endif
 endfunction
 
-nnoremap <silent> <Leader>t :call <SID>MixTest("--exclude test --include line:" . line('.'))<CR>zz
-tnoremap <silent> <Leader>t <C-w>N:call <SID>MixTest("--exclude test --include line:" . line('.'))<CR>zz
+nmap <silent> <Leader>t :call <SID>MixTest("--exclude test --include line:" . line('.'))<CR>zz
+tmap <silent> <Leader>t <C-w>N:call <SID>MixTest("--exclude test --include line:" . line('.'))<CR>zz
+nmap <silent> <Leader>T :call <SID>MixTest("--include integration")<CR>zz
+tmap <silent> <Leader>T <C-w>N:call <SID>MixTest("--include integration")<CR>zz
 
-nnoremap <silent> <Leader>T :call <SID>MixTest("--include integration")<CR>zz
-tnoremap <silent> <Leader>T <C-w>N:call <SID>MixTest("--include integration")<CR>zz
-
-" Elixir snippet to inspect
+" Elixir snippet to append inspect to the end of a line
 nmap <Leader>i i\|> IO.inspect(label: "")<ESC>hi
-imap <Leader>i \|> IO.inspect(label: "")<ESC>hi
